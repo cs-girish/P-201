@@ -1,3 +1,5 @@
+import { db } from './config.js';
+
 const $ = selector => document.querySelector(selector);
 const format = amount => `₹${amount.toLocaleString('en-IN')}`;
 let savedCart = [];
@@ -11,9 +13,9 @@ const panel = $('#cart-panel');
 
 async function loadProducts() {
   try {
-    const response = await fetch('/api/products');
-    if (!response.ok) throw new Error();
-    products = await response.json();
+    const { data, error } = await db.from('products').select('id,name,category,unit,price,emoji,description,available').eq('available', true).order('name');
+    if (error) throw error;
+    products = data;
     renderCategories(); renderProducts(); renderBasket();
   } catch { grid.textContent = 'Products could not be loaded. Please refresh the page.'; }
 }
@@ -87,11 +89,10 @@ $('#checkout').addEventListener('submit', async event => {
   const data = new FormData(form), message = $('#checkout-message');
   message.textContent = ''; button.disabled = true; button.textContent = 'Sending…';
   try {
-    const response = await fetch('/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: data.get('name'), phone: data.get('phone'), note: data.get('note'), items: [...basket].map(([id, quantity]) => ({ id, quantity })) }) });
-    const result = await response.json();
-    if (!response.ok) throw new Error(result.error || 'Could not send order.');
+    const { data: result, error } = await db.rpc('place_order', { p_name: data.get('name'), p_phone: data.get('phone'), p_note: data.get('note'), p_cart: [...basket].map(([id, quantity]) => ({ id, quantity })) });
+    if (error) throw new Error(error.message || 'Could not send order.');
     basket.clear(); form.reset(); renderBasket();
-    message.className = 'success'; message.textContent = `Order ${result.id} received! Your total is ${format(result.total)}. Keep this number and collect in store.`;
+    message.className = 'success'; message.textContent = `Order ${result.code} received! Your total is ${format(result.total)}. Keep this number and collect in store.`;
   } catch (error) { message.className = 'error'; message.textContent = error.message; }
   finally { button.disabled = false; button.innerHTML = 'Send pickup order <span>↗</span>'; }
 });

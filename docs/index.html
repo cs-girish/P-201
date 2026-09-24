@@ -6,12 +6,12 @@
   <meta name="theme-color" content="#f7f5ee" />
   <meta name="description" content="Browse essentials, build your basket and collect your order in store." />
   <title>Neighbourhood Market · Order for pickup</title>
-  <link rel="stylesheet" href="/styles.css" />
-  <script type="module" src="/shop.js"></script>
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="module" src="./shop.js"></script>
 </head>
 <body>
   <header class="topbar shell">
-    <a class="brand" href="/" aria-label="Neighbourhood Market home"><span class="brand-mark">n<span>·</span></span><span>NEIGHBOURHOOD<br><strong>MARKET</strong></span></a>
+    <a class="brand" href="./" aria-label="Neighbourhood Market home"><span class="brand-mark">n<span>·</span></span><span>NEIGHBOURHOOD<br><strong>MARKET</strong></span></a>
     <nav class="header-actions"><span class="open-label"><span class="live-dot"></span> OPEN FOR PICKUP ORDERS</span><button id="cart-button" class="cart-trigger" type="button">Your basket <span id="cart-count" class="count">0</span></button></nav>
   </header>
   <main>
@@ -23,7 +23,7 @@
     <section class="catalog shell" id="products"><div class="section-heading"><div><div class="eyebrow"><span class="line"></span> THE GOOD STUFF</div><h2>On the shelves<span class="period">.</span></h2></div><p>A little of what you need,<br>all in one place.</p></div><div class="catalog-controls"><div id="categories" class="categories" aria-label="Product categories"></div><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search products" aria-label="Search products" /></label></div><div id="product-grid" class="product-grid" aria-live="polite"><p>Loading products…</p></div></section>
     <section class="bottom-note shell"><span>✳</span><div><h2>Shop your way.</h2><p>Add what you need, send us the list, and we’ll have it ready for you. No online payment needed.</p></div><button class="button button-outline" id="bottom-cart" type="button">View your basket ↗</button></section>
   </main>
-  <footer class="footer shell"><span class="brand footer-brand"><span class="brand-mark">n<span>·</span></span><span>NEIGHBOURHOOD<br><strong>MARKET</strong></span></span><span>Made for easier everyday shopping.</span><a href="/admin">Shopkeeper</a></footer>
+  <footer class="footer shell"><span class="brand footer-brand"><span class="brand-mark">n<span>·</span></span><span>NEIGHBOURHOOD<br><strong>MARKET</strong></span></span><span>Made for easier everyday shopping.</span><a href="./admin.html">Shopkeeper</a></footer>
   <div id="overlay" class="overlay" hidden></div>
   <aside id="cart-panel" class="cart-panel" role="dialog" aria-modal="true" aria-label="Your basket" hidden><div class="panel-head"><div><div class="eyebrow">YOUR PICKS</div><h2>Your basket<span class="period">.</span></h2></div><button id="close-cart" class="icon-button" type="button" aria-label="Close basket">×</button></div><div id="cart-lines" class="cart-lines"></div><div class="panel-bottom"><div class="total-row"><span>Estimated total</span><strong id="cart-total">₹0</strong></div><p class="subtle">Final availability confirmed by the shop. Pay at pickup.</p><form id="checkout"><label>Your name<input name="name" autocomplete="name" required maxlength="80" placeholder="Full name" /></label><label>Phone number<input name="phone" type="tel" autocomplete="tel" required placeholder="Mobile number" /></label><label>Note for the shop <span class="optional">optional</span><textarea name="note" maxlength="300" rows="2" placeholder="Anything we should know?"></textarea></label><button class="button button-dark checkout-button" type="submit">Send pickup order <span>↗</span></button></form><div id="checkout-message" role="status"></div></div></aside>
 </body>
